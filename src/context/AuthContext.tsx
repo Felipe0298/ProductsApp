@@ -42,12 +42,18 @@ export const AuthProvider = ({ children }: any) => {
       
     } catch (error: any) {
       console.log(error.response.data.msg)
+      dispatch({type:'addError',
+      payload: error.response.data.msg || 'Información incorrecta'
+    })
     }
   };
 
   const signUp = () => { };
   const logOut = () => { };
-  const removeError = () => { };
+
+  const removeError = () => { 
+    dispatch({ type: 'removeError'})
+  };
 
 
   return (
