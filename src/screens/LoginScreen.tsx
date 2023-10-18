@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import { Platform, KeyboardAvoidingView, Text, TextInput, View, Keyboard, Alert,  } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { Platform, KeyboardAvoidingView, Text, TextInput, View, Keyboard, Alert, } from 'react-native';
 import { loginStyles } from '../theme/loginTheme';
 import { Background } from '../components/Background';
 import { WhiteLogo } from '../components/WhiteLogo';
@@ -8,33 +8,33 @@ import { useForm } from '../hooks/useForm';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthContext } from '../context/AuthContext';
 
-interface Props extends StackScreenProps<any,any>{}
+interface Props extends StackScreenProps<any, any> { }
 
 export const LoginScreen = ({ navigation }: Props) => {
 
-  const {signIn, errorMessage, removeError } = useContext(AuthContext)
+  const { signIn, errorMessage, removeError } = useContext(AuthContext)
 
   const { email, password, onChange } = useForm({
-    email:'',
-    password:''
+    email: '',
+    password: ''
   });
 
   useEffect(() => {
-     if (errorMessage.length === 0) return;
+    if (errorMessage.length === 0) return;
 
-     Alert.alert('Login incorrecto', errorMessage,
+    Alert.alert('Login incorrecto', errorMessage,
       [{
         text: 'Ok',
         onPress: removeError
       }]
-     )
+    )
   }, [errorMessage])
-  
 
-  const onLogin= () => {
-    console.log({email, password})
+
+  const onLogin = () => {
+    console.log({ email, password })
     Keyboard.dismiss();
-    signIn({ correo: email, password});
+    signIn({ correo: email, password });
   }
 
   return (
@@ -43,8 +43,8 @@ export const LoginScreen = ({ navigation }: Props) => {
       <Background />
 
       <KeyboardAvoidingView
-        style= {{flex: 1}}
-        behavior={ (Platform.OS === 'ios') ? 'padding' : 'height'}
+        style={{ flex: 1 }}
+        behavior={(Platform.OS === 'ios') ? 'padding' : 'height'}
       >
 
         <View style={loginStyles.formContainer}>
@@ -68,8 +68,8 @@ export const LoginScreen = ({ navigation }: Props) => {
             selectionColor='white'
 
             onChangeText={(value) => onChange(value, 'email')}
-            value={ email }
-            onSubmitEditing={ onLogin }
+            value={email}
+            onSubmitEditing={onLogin}
 
             autoCapitalize='none'
             autoCorrect={false}
@@ -89,8 +89,8 @@ export const LoginScreen = ({ navigation }: Props) => {
             selectionColor='white'
 
             onChangeText={(value) => onChange(value, 'password')}
-            value={ password }
-            onSubmitEditing={ onLogin }
+            value={password}
+            onSubmitEditing={onLogin}
 
             autoCapitalize='none'
             autoCorrect={false}
@@ -102,7 +102,7 @@ export const LoginScreen = ({ navigation }: Props) => {
             <TouchableOpacity
               activeOpacity={0.8}
               style={loginStyles.button}
-              onPress={ onLogin }
+              onPress={onLogin}
             >
               <Text style={loginStyles.buttonText}>Login</Text>
             </TouchableOpacity>
